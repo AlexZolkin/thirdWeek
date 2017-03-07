@@ -1,6 +1,6 @@
 import firstTask.A;
 import firstTask.ListUtils;
-import firstTask.Node;
+import firstTask.MyLinkedList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -10,60 +10,40 @@ import static org.junit.Assert.assertSame;
  * Created by Алексей on 07.03.2017.
  */
 public class ListReversionTest {
-
-    static A<Object> head;
-    static A<Object> second;
-    static A<Object> third;
-    static A<Object> fourth;
-    static A<Object> fifth;
-    static A<Object> sixth;
-    static A<Object> seventh;
-
+    MyLinkedList list;
     @BeforeClass
-    public static void create() {
-        head = new Node<>();
-        second = new Node<>();
-        third = new Node<>();
-        fourth = new Node<>();
-        fifth = new Node<>();
-        sixth = new Node<>();
-        seventh = new Node<>();
-        head.setNext(second);
-        second.setNext(third);
-        third.setNext(fourth);
-        fourth.setNext(fifth);
-        fifth.setNext(sixth);
-        sixth.setNext(seventh);
+    public void setUp(){
+        list = new MyLinkedList();
     }
 
     @Test
     public void testReversion(){
 
-        A<Object> expected = seventh;
-        A<Object> actual = ListUtils.reversion(head);
+        A<Object> expected = list.seventh;
+        A<Object> actual = ListUtils.reversion(list.head);
         assertSame(expected, actual);
 
-        expected = sixth;
+        expected = list.sixth;
         actual = actual.getNext();
         assertSame(expected, actual);
 
-        expected = fifth;
+        expected = list.fifth;
         actual = actual.getNext();
         assertSame(expected, actual);
 
-        expected = fourth;
+        expected = list.fourth;
         actual = actual.getNext();
         assertSame(expected, actual);
 
-        expected = third;
+        expected = list.third;
         actual = actual.getNext();
         assertSame(expected, actual);
 
-        expected = second;
+        expected = list.second;
         actual = actual.getNext();
         assertSame(expected, actual);
 
-        expected = head;
+        expected = list.head;
         actual = actual.getNext();
         assertSame(expected, actual);
     }
