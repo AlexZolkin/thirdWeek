@@ -2,7 +2,7 @@ import firstTask.A;
 import firstTask.ListUtils;
 import firstTask.Node;
 import org.junit.BeforeClass;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import static org.junit.Assert.assertSame;
 
