@@ -16,11 +16,11 @@ public class Rozetka implements Iterator<Product> {
 
     @Override
     public boolean hasNext() {
-        return curPos < (products.size() - 1);
+        return curPos < products.size();
     }
 
     @Override
     public Product next() {
-        return curPos < (products.size() - 1) ? products.get(curPos++) : null;
+        return curPos < products.size() ? products.get(curPos++) : null;
     }
 }

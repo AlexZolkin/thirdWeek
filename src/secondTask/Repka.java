@@ -15,11 +15,11 @@ public class Repka implements Iterator<Product> {
 
     @Override
     public boolean hasNext() {
-        return curPos < (products.length - 1);
+        return curPos < products.length;
     }
 
     @Override
     public Product next() {
-        return curPos < (products.length - 1) ? products[curPos++] : null;
+        return curPos < products.length ? products[curPos++] : null;
     }
 }
