@@ -1,7 +1,7 @@
 import firstTask.A;
 import firstTask.ListUtils;
 import firstTask.MyLinkedList;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertSame;
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertSame;
  */
 public class ListReversionTest {
     MyLinkedList list;
-    @BeforeClass
+    @Before
     public void setUp(){
         list = new MyLinkedList();
     }
