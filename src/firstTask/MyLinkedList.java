@@ -11,14 +11,18 @@ public class MyLinkedList {
     public A<Object> fifth;
     public A<Object> sixth;
     public A<Object> seventh;
+    public Node<Object> node;
     public MyLinkedList(){
         head = new Node<>("A");
         second = new Node<>("B");
         third = new Node<>("C");
         fourth = new Node<>("D");
         fifth = new Node<>("E");
-        fifth = new Node<>("F");
+        sixth = new Node<>("F");
         seventh = new Node<>("G");
+
+        node = (Node)head;
+
         head.setNext(second);
         second.setNext(third);
         third.setNext(fourth);

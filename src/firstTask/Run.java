@@ -6,6 +6,10 @@ package firstTask;
  */
 public class Run {
     public static void main( String[] args ) {
-
+        MyLinkedList list = new MyLinkedList();
+        list.node.showList();
+        A<Object> a = ListUtils.reversion(list.node);
+        list.node = (MyLinkedList.Node<Object>)a;
+        list.node.showList();
     }
 }

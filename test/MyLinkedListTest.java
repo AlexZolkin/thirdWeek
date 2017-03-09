@@ -1,15 +1,14 @@
 import firstTask.A;
 import firstTask.ListUtils;
 import firstTask.MyLinkedList;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import static org.junit.Assert.assertSame;
 
 /**
  * Created by Алексей on 07.03.2017.
  */
-public class ListReversionTest {
+public class MyLinkedListTest {
     MyLinkedList list;
     @Before
     public void setUp(){
