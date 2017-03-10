@@ -12,8 +12,8 @@ public class MyLinkedList<T> implements MyList<T> {
 
     public MyLinkedList(){
         head = new Node<>();
-        head.setNext(null);
-        head.setPrev(null);
+        //head.setNext(null);
+        //head.setPrev(null);
         listSize = 1;
     }
     private Node<T> getNode(int index){
@@ -55,16 +55,27 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public boolean add(T item) {
-        return add(item, listSize - 1);
+        return add(item, listSize);
     }
 
     @Override
     public boolean add(T item, int index) {
-        if(item == null || index >= listSize || index < 0)
+        if(item == null || index > listSize || index < 0)
             return false;
+        if(listSize == 1 && head.getValue() == null){
+            head.setValue(item);
+            return true;
+        }
+        if(index == 0){
+            Node<T> tmp = new Node<>(null, head, item);
+            head.setPrev(tmp);
+            head = tmp;
+            listSize++;
+            return true;
+        }
         Node<T> tmpPrev, tmpNext;
         tmpPrev = getNode(index - 1);
-        tmpNext = getNode(index + 1);
+        tmpNext = getNode(index);
         Node<T> node = new Node<>(tmpPrev, tmpNext, item);
         if(tmpNext != null)
             tmpNext.setPrev(node);
@@ -91,13 +102,14 @@ public class MyLinkedList<T> implements MyList<T> {
             flag = false;
             for(int i=0;i<listSize;i++){
                 if(tmp.getValue().equals(item)){
-                    if(tmp.getPrev() != null)
-                        tmp.setPrev(getNode(i-1));
-                    if(tmp.getNext() != null)
-                        tmp.setNext(getNode(i+1));
+                    tmp.getPrev().setNext(tmp.getNext());
+                    tmp.getNext().setPrev(tmp.getPrev());
                     flag = true;
                     controlFlag = true;
+                    listSize--;
+                    i--;
                 }
+                tmp = tmp.getNext();
             }
         }while (flag);
         return controlFlag;
@@ -107,30 +119,29 @@ public class MyLinkedList<T> implements MyList<T> {
     public boolean delete(T item, int index) {
         if(getNode(index).getValue().equals(item)){
             Node<T> tmp = getNode(index);
-            if(tmp.getPrev() != null)
-                tmp.setPrev(getNode(index-1));
-            if(tmp.getNext() != null)
-                tmp.setNext(getNode(index+1));
+            tmp.getPrev().setNext(tmp.getNext());
+            tmp.getNext().setPrev(tmp.getPrev());
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean delete(int index) {
+    public boolean deleteByInd(int index) {
         return delete(getNode(index).getValue(), index);
     }
 
     @Override
     public boolean deleteAll(int beg, int end) {
         Node<T> nodeBeg, nodeEnd;
-        nodeBeg = getNode(beg);
+        nodeBeg = getNode(beg - 1);
         nodeEnd = getNode(end);
-        if(nodeBeg != null && nodeEnd != null){
-            nodeBeg.setNext(nodeEnd);
-            nodeEnd.setPrev(nodeBeg);
-            return true;
-        }
+        if(nodeBeg == null)
+            nodeBeg = head;
+        if (nodeEnd == null)
+            nodeEnd = getNode(listSize-1);
+        nodeBeg.setNext(nodeEnd);
+        nodeEnd.setPrev(nodeBeg);
         return false;
     }
 
@@ -147,7 +158,7 @@ public class MyLinkedList<T> implements MyList<T> {
     }
 
     @Override
-    public boolean contents(T item) {
+    public boolean contains(T item) {
         for(int i=0;i<listSize;i++)
             if(getNode(i).getValue().equals(item))
                 return true;
