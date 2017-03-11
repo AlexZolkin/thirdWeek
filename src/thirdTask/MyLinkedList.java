@@ -147,23 +147,23 @@ public class MyLinkedList<T> implements MyList<T> {
     * */
     @Override
     public boolean delete(T item) {
-        boolean flag, controlFlag = false;
-        do {
-            Node<T> tmp = head;
-            flag = false;
-            for(int i=0;i<listSize;i++){
-                if(tmp.getValue().equals(item)){
-                    tmp.getPrev().setNext(tmp.getNext());
-                    tmp.getNext().setPrev(tmp.getPrev());
-                    flag = true;
-                    controlFlag = true;
-                    listSize--;
-                    i--;
-                }
-                tmp = tmp.getNext();
+        Node<T> tmp = head;
+        while (tmp.hasNext()){
+            if(tmp.getValue().equals(item) && !tmp.hasPrev()){
+                head = new Node<>(tmp.getNext());
+                listSize--;
+            }else if(tmp.getValue().equals(item)){
+                tmp.getPrev().setNext(tmp.getNext());
+                tmp.getNext().setPrev(tmp.getPrev());
+                listSize--;
             }
-        }while (flag);
-        return controlFlag;
+            tmp = tmp.getNext();
+        }
+        if(tmp.getValue().equals(item)){
+            tmp.getPrev().setNext(null);
+            listSize--;
+        }
+        return true;
     }
 
     /*
@@ -300,7 +300,7 @@ public class MyLinkedList<T> implements MyList<T> {
         * forward in the list
         * */
         public boolean hasNext(){
-            return next == null ? true : false;
+            return next == null ? false : true;
         }
 
         /*
@@ -308,7 +308,7 @@ public class MyLinkedList<T> implements MyList<T> {
         * behind in the list
         * */
         public boolean hasPrev(){
-            return prev == null ? true : false;
+            return prev == null ? false : true;
         }
 
         /*

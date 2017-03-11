@@ -103,7 +103,7 @@ public class MyListTest {
     * delete them all with one call
     * */
     @Test
-    public void testDelete(){
+    public void testDelete1(){
         myList.add(11,0);
         myList.add(11);
         myList.add(11,3);
@@ -111,6 +111,19 @@ public class MyListTest {
         myList.delete(11);
         Assert.assertNotEquals(11, myList.get(0));
         Assert.assertNotEquals(11, myList.get());
+        Assert.assertNotEquals(11, myList.get(3));
+    }
+    @Test
+    public void testDelete2(){
+        myList.add(12,0);
+        myList.add("1",0);
+        myList.add(11);
+        myList.add(11,3);
+
+        myList.delete(11);
+        myList.delete("1");
+        Assert.assertEquals(12, myList.get(0));
+        Assert.assertNotEquals("1", myList.get(1));
         Assert.assertNotEquals(11, myList.get(3));
     }
 
